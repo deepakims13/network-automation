@@ -14,6 +14,12 @@ def setup_module():
     # returns JSON object as 
     # a dictionary
     data = json.load(bgp_input)
+
+    # Opening Topology JSON file
+    with open('topology.json') as topology:
+    # returns JSON object as 
+    # a dictionary
+    topology_data = json.load(topology)
     
     try:
         # Connect to router1 using username/password authentication.
@@ -46,8 +52,12 @@ class TestInterfaceConfig():
                                         password=data['R2']['router_password'], 
                                         device_type=data['R2']['device_type'])
         
-        interface_config_R1 = setup_router_interface(interface_name, ip, netmask)        
+        interface_config_R1 = setup_router_interface(interface_name=topology_data['Links']['R1_R2_1'], 
+                                                     ip=data['R1']['interface_ip'], 
+                                                     netmask='24')        
         conn_setup_R1.send_config_set(interface_config_R1)
         
-        interface_config_R2 = setup_router_interface(interface_name, ip, netmask)        
+        interface_config_R2 = setup_router_interface(interface_name=topology_data['Links']['R1_R2_1'], 
+                                                     ip=data['R1']['interface_ip'], 
+                                                     netmask='24')        
         conn_setup_R2.send_config_set(interface_config_R2)      
