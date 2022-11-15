@@ -2,11 +2,15 @@
 	"R1": {
 		"router_ip": "192.168.20.1",
 		"router_username": "admin",
-		"router_password": "admin123"
+		"router_password": "admin123",
+		"ssh_port": "22",
+		"device_type": "cisco_xr"
 	},
 	"R2": {
 		"router_ip": "192.168.20.2",
 		"router_username": "admin",
-		"router_password": "admin123"
+		"router_password": "admin123",
+		"ssh_port": "22",
+		"device_type": "cisco_xr"
 	}
 }
