@@ -3,6 +3,7 @@ import json
 import pytest
 import logging
 from connection import netmiko_connection
+from bgp_cli_lib import setup_router_interface
 
 def setup_module():
     '''
@@ -45,3 +46,8 @@ class TestInterfaceConfig():
                                         password=data['R2']['router_password'], 
                                         device_type=data['R2']['device_type'])
         
+        interface_config_R1 = setup_router_interface(interface_name, ip, netmask)        
+        conn_setup_R1.send_config_set(interface_config_R1)
+        
+        interface_config_R2 = setup_router_interface(interface_name, ip, netmask)        
+        conn_setup_R2.send_config_set(interface_config_R2)      
