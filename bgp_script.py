@@ -57,7 +57,7 @@ class TestInterfaceConfig():
                                                      netmask='24')        
         conn_setup_R1.send_config_set(interface_config_R1)
         
-        interface_config_R2 = setup_router_interface(interface_name=topology_data['Links']['R1_R2_1'], 
-                                                     ip=data['R1']['interface_ip'], 
+        interface_config_R2 = setup_router_interface(interface_name=topology_data['Links']['R2_R1_1'], 
+                                                     ip=data['R2']['interface_ip'], 
                                                      netmask='24')        
         conn_setup_R2.send_config_set(interface_config_R2)      
