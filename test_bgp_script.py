@@ -3,7 +3,7 @@ import json
 import pytest
 import logging
 from connection import netmiko_connection
-from bgp_cli_lib import setup_router_interface,delete_router_interface
+from bgp_cli_lib import setup_router_interface,delete_router_interface,setup_bgp,delete_bgp
 
 def setup_module():
     '''
