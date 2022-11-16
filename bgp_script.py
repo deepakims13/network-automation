@@ -11,15 +11,15 @@ def setup_module():
     '''
     # Opening Input JSON file
     with open('bgp_input.json') as bgp_input:
-    # returns JSON object as 
-    # a dictionary
-    data = json.load(bgp_input)
+        # returns JSON object as 
+        # a dictionary
+        data = json.load(bgp_input)
 
     # Opening Topology JSON file
     with open('topology.json') as topology:
-    # returns JSON object as 
-    # a dictionary
-    topology_data = json.load(topology)
+        # returns JSON object as 
+        # a dictionary
+        topology_data = json.load(topology)
     
     try:
         # Connect to router1 using username/password authentication.
