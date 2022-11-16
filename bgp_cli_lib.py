@@ -40,7 +40,7 @@ def delete_router_interface(self, interface_name):
     ]
     return interface_unconfig
 
-def setup_bgp(self, as_number, router_ip):
+def setup_bgp(self, as_number, router_ip, af, route_type):
     '''
     Configure BGP.
   
@@ -49,6 +49,8 @@ def setup_bgp(self, as_number, router_ip):
     Parameters:
     as_number (str): Autonomous system number
     router_ip (str): Router IP address
+    af (str): Address family ipv4 or ipv6
+    route_type (str): Routing type unicast or multicast
   
     Returns:
     List: List of BGP config
@@ -56,7 +58,8 @@ def setup_bgp(self, as_number, router_ip):
     # Create a CLI configuration
     bgp_config = [
         "router bgp {}".format(as_number),
-        "neighbor {} remote-as {}".format(router_ip, as_number)
+        "neighbor {} remote-as {}".format(router_ip, as_number),
+        "address-family {} {}".format(af, route_type)
     ]
     return bgp_config
 
