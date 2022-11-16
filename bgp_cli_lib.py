@@ -2,6 +2,8 @@ import logging
 import requests
 import urllib3
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 def setup_router_interface(interface_name, ip, netmask):
     '''
     Configure router interface.
