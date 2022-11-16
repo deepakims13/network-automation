@@ -3,7 +3,7 @@ import json
 import pytest
 import logging
 from connection import netmiko_connection
-from bgp_cli_lib import setup_router_interface
+from bgp_cli_lib import setup_router_interface,delete_router_interface
 
 def setup_module():
     '''
@@ -41,23 +41,32 @@ class TestInterfaceConfig():
     Testcase for Interface configurations in router
     '''
     def test_interface_config():
-        conn_setup_R1 = netmiko_connection(ip_address=data['R1']['router_ip'], 
-                                        ssh_port=data['R1']['ssh_port'], 
-                                        username=data['R1']['router_username'],
-                                        password=data['R1']['router_password'], 
-                                        device_type=data['R1']['device_type'])
-        conn_setup_R2 = netmiko_connection(ip_address=data['R2']['router_ip'], 
-                                        ssh_port=data['R2']['ssh_port'], 
-                                        username=data['R2']['router_username'],
-                                        password=data['R2']['router_password'], 
-                                        device_type=data['R2']['device_type'])
+        try:
+            conn_setup_R1 = netmiko_connection(ip_address=data['R1']['router_ip'], 
+                                            ssh_port=data['R1']['ssh_port'], 
+                                            username=data['R1']['router_username'],
+                                            password=data['R1']['router_password'], 
+                                            device_type=data['R1']['device_type'])
+            conn_setup_R2 = netmiko_connection(ip_address=data['R2']['router_ip'], 
+                                            ssh_port=data['R2']['ssh_port'], 
+                                            username=data['R2']['router_username'],
+                                            password=data['R2']['router_password'], 
+                                            device_type=data['R2']['device_type'])
         
-        interface_config_R1 = setup_router_interface(interface_name=topology_data['Links']['R1_R2_1'], 
-                                                     ip=data['R1']['interface_ip'], 
-                                                     netmask='24')        
-        conn_setup_R1.send_config_set(interface_config_R1)
+            interface_config_R1 = setup_router_interface(interface_name=topology_data['Links']['R1_R2_1'], 
+                                                         ip=data['R1']['interface_ip'], 
+                                                         netmask='24')        
+            conn_setup_R1.send_config_set(interface_config_R1)
         
-        interface_config_R2 = setup_router_interface(interface_name=topology_data['Links']['R2_R1_1'], 
-                                                     ip=data['R2']['interface_ip'], 
-                                                     netmask='24')        
-        conn_setup_R2.send_config_set(interface_config_R2)      
+            interface_config_R2 = setup_router_interface(interface_name=topology_data['Links']['R2_R1_1'], 
+                                                         ip=data['R2']['interface_ip'], 
+                                                         netmask='24')        
+            conn_setup_R2.send_config_set(interface_config_R2)  
+        except Exception as error_message:
+            log.info("Unable to configure router interfaces")
+            log.info(error_message)
+        finally:
+            log.info("Perform cleanup by unconfiguring interfaces")
+            delete_router_interface(interface_name=topology_data['Links']['R1_R2_1'])
+            delete_router_interface(interface_name=topology_data['Links']['R2_R1_1'])
+
