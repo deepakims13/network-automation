@@ -70,3 +70,23 @@ class TestInterfaceConfig():
             delete_router_interface(interface_name=topology_data['Links']['R1_R2_1'])
             delete_router_interface(interface_name=topology_data['Links']['R2_R1_1'])
 
+class TestBgpConfig(TestInterfaceConfig):
+    '''
+    Testcase for BGP configurations in router
+    '''
+    def test_bgp_config():
+        try:
+            bgp_config_R1 = setup_bgp(as_number=data['R1']['r1_as_number'], 
+                                      router_ip=data['R2']['router_ip'])        
+            conn_setup_R1.send_config_set(bgp_config_R1)
+        
+            bgp_config_R2 = setup_bgp(as_number=data['R2']['r2_as_number'], 
+                                      router_ip=data['R2']['router_ip'])        
+            conn_setup_R2.send_config_set(bgp_config_R2)  
+        except Exception as error_message:
+            log.info("Unable to configure BGP")
+            log.info(error_message)
+        finally:
+            log.info("Perform cleanup by unconfiguring BGP")
+            delete_bgp(as_number=data['R1']['r1_as_number'])
+            delete_bgp(as_number=data['R2']['r2_as_number'])
