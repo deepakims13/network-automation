@@ -125,3 +125,6 @@ class TestBgpSession(TestBgpConfig):
                 table.append(bgp_data)
             # Display BGP data
             log.info(tabulate(table, headers, tablefmt="fancy_grid"))
+        except Exception as error_message:
+            log.info("Verification failed")
+            log.info(error_message)
