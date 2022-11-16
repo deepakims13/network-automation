@@ -21,3 +21,21 @@ def setup_router_interface(self, interface_name, ip, netmask):
         "no shut"
     ]
     return interface_config
+
+def delete_router_interface(self, interface_name):
+    '''
+    Unconfigure router interface.
+  
+    Extended description of function.
+  
+    Parameters:
+    interface_name (str): Name of interface
+  
+    Returns:
+    List: List of interface config
+    '''
+    # Create a CLI configuration
+    interface_unconfig = [
+        "no interface {}".format(interface_name)
+    ]
+    return interface_unconfig
