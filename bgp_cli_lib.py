@@ -1,4 +1,6 @@
 import logging
+import requests
+import urllib3
 
 def setup_router_interface(interface_name, ip, netmask):
     '''
@@ -82,3 +84,24 @@ def delete_bgp(as_number):
     ]
     return bgp_unconfig
 
+def get_bgp(host, port, username, password):
+    '''
+    Verify BGP using REST.
+  
+    Extended description of function.
+  
+    Parameters:
+    host (str): Router hostname or IP address
+    port (str): Router port
+    username (str): Router username
+    password (str): Router password
+  
+    Returns:
+    Json: Json file of response
+    '''
+    url = "https://{h}:{p}/restconf/data/Cisco-IOS-XR-bgp-oper:bgp-state-data".format(host, port)
+    headers = {'Content-Type': 'application/yang-data+json',
+               'Accept': 'application/yang-data+json'}
+
+    response = requests.get(url, auth=(username, password), headers=headers, verify=False)
+    return response.json()
