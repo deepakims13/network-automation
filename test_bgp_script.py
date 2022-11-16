@@ -84,8 +84,8 @@ class TestBgpConfig(TestInterfaceConfig):
         
             bgp_config_R2 = setup_bgp(as_number=data['R2']['r2_as_number'], 
                                       router_ip=data['R2']['router_ip'],
-                                      af=data['R1']['address_family'],
-                                      route_type=data['R1']['route_type'])        
+                                      af=data['R2']['address_family'],
+                                      route_type=data['R2']['route_type'])        
             conn_setup_R2.send_config_set(bgp_config_R2)  
         except Exception as error_message:
             log.info("Unable to configure BGP")
