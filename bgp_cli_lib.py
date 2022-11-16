@@ -1,6 +1,6 @@
 import logging
 
-def setup_router_interface(self, interface_name, ip, netmask):
+def setup_router_interface(interface_name, ip, netmask):
     '''
     Configure router interface.
   
@@ -22,7 +22,7 @@ def setup_router_interface(self, interface_name, ip, netmask):
     ]
     return interface_config
 
-def delete_router_interface(self, interface_name):
+def delete_router_interface(interface_name):
     '''
     Unconfigure router interface.
   
@@ -40,7 +40,7 @@ def delete_router_interface(self, interface_name):
     ]
     return interface_unconfig
 
-def setup_bgp(self, as_number, router_ip, af, route_type):
+def setup_bgp(as_number, router_ip, af, route_type):
     '''
     Configure BGP.
   
@@ -63,7 +63,7 @@ def setup_bgp(self, as_number, router_ip, af, route_type):
     ]
     return bgp_config
 
-def delete_bgp(self, as_number):
+def delete_bgp(as_number):
     '''
     Unconfigure BGP.
   
