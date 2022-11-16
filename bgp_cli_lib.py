@@ -59,3 +59,23 @@ def setup_bgp(self, as_number, router_ip):
         "neighbor {} remote-as {}".format(router_ip, as_number)
     ]
     return bgp_config
+
+def delete_bgp(self, as_number):
+    '''
+    Unconfigure BGP.
+  
+    Extended description of function.
+  
+    Parameters:
+    as_number (str): Autonomous system number
+  
+    Returns:
+    List: List of BGP unconfig
+    '''
+    # Create a CLI configuration
+    bgp_unconfig = [
+        "no router bgp {}".format(as_number),
+        "neighbor {} remote-as {}".format(router_ip, as_number)
+    ]
+    return bgp_unconfig
+
