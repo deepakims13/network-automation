@@ -3,11 +3,7 @@ import json
 import pytest
 import logging
 from connection import netmiko_connection
-from bgp_cli_lib import setup_router_interface,delete_router_interface,setup_bgp,delete_bgp
-
-import requests
-import urllib3
-import sys
+from bgp_cli_lib import setup_router_interface,delete_router_interface,setup_bgp,delete_bgp,get_bgp
 from tabulate import tabulate
 
 
@@ -105,3 +101,27 @@ class TestBgpSession(TestBgpConfig):
     '''
     Testcase for BGP verifications in router
     '''
+    def test_verify_bgp():
+        try:
+            neighbors = get_bgp(host=data['R1']['router_ip'], 
+                                port=data['R1']['port'], 
+                                username=data['R1']['router_username'], 
+                                password=data['R1']['router_password'])
+            log.info(neighbors)
+
+            headers = ["Neighbor",
+            "LINK",
+            "UP-TIME",
+            "STATE",
+            "PfxRcd" ]
+            table = list()
+
+            for item in neighbors['Cisco-IOS-XR-bgp-oper:bgp-state-data']['neighbors']['neighbor']:
+                bgp_data = [item['neighbor-id'],
+                item['link'],
+                item['up-time'],
+                item['connection']['state'],
+                item['prefix-activity']['received']['total-prefixes']]
+                table.append(bgp_data)
+            # Display BGP data
+            log.info(tabulate(table, headers, tablefmt="fancy_grid"))
