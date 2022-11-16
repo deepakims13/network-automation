@@ -6,7 +6,9 @@
 		"ssh_port": "22",
 		"device_type": "cisco_xr",
 		"interface_ip": "1.1.1.1",
-		"r1_as_number": "65002"
+		"r1_as_number": "65002",
+		"address_family": "ipv4",
+		"route_type": "unicast"
 	},
 	"R2": {
 		"router_ip": "192.168.20.2",
@@ -15,6 +17,8 @@
 		"ssh_port": "22",
 		"device_type": "cisco_xr",
 		"interface_ip": "1.1.1.2",
-		"r2_as_number": "65002"
+		"r2_as_number": "65002",
+		"address_family": "ipv4",
+		"route_type": "unicast"
 	}
 }
