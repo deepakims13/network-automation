@@ -5,7 +5,8 @@
 		"router_password": "admin123",
 		"ssh_port": "22",
 		"device_type": "cisco_xr",
-		"interface_ip": "1.1.1.1"
+		"interface_ip": "1.1.1.1",
+		"r1_as_number": "65002"
 	},
 	"R2": {
 		"router_ip": "192.168.20.2",
@@ -13,6 +14,7 @@
 		"router_password": "admin123",
 		"ssh_port": "22",
 		"device_type": "cisco_xr",
-		"interface_ip": "1.1.1.2"
+		"interface_ip": "1.1.1.2",
+		"r2_as_number": "65002"
 	}
 }
