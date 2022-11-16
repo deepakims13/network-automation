@@ -32,7 +32,7 @@ def delete_router_interface(self, interface_name):
     interface_name (str): Name of interface
   
     Returns:
-    List: List of interface config
+    List: List of interface unconfig
     '''
     # Create a CLI configuration
     interface_unconfig = [
