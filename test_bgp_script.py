@@ -5,6 +5,12 @@ import logging
 from connection import netmiko_connection
 from bgp_cli_lib import setup_router_interface,delete_router_interface,setup_bgp,delete_bgp
 
+import requests
+import urllib3
+import sys
+from tabulate import tabulate
+
+
 def setup_module():
     '''
     Setup module for common configurations
@@ -94,3 +100,8 @@ class TestBgpConfig(TestInterfaceConfig):
             log.info("Perform cleanup by unconfiguring BGP")
             delete_bgp(as_number=data['R1']['r1_as_number'])
             delete_bgp(as_number=data['R2']['r2_as_number'])
+            
+class TestBgpSession(TestBgpConfig):
+    '''
+    Testcase for BGP verifications in router
+    '''
